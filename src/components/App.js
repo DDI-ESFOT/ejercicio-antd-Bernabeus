@@ -5,7 +5,7 @@ import { AudioOutlined } from '@ant-design/icons';
 
 function App() {
   const [movieInf, setMovieInf] = useState([]);
-  const [movieE, setmovieE] = useState('car');
+  const [movieE, setmovieE] = useState('Transformers');
 
   const { Search } = Input;
   const suffix = (
