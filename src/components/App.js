@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
-import '../styles/App.css';
 import Movies from "./Movies";
-import { Input, Row, Col, Button, Card } from 'antd';
+import React, {useEffect, useState} from "react";
+import { Input, Space,Row,Col} from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
 
 function App() {
-  const { Meta } = Card;
-  const [movieInf, setMovieInf] = useState(null);
-  const [movie, setMovie] = useState('car');
+  const [movieInf, setMovieInf] = useState([]);
+  const [movieE, setmovieE] = useState('car');
 
   const { Search } = Input;
   const suffix = (
@@ -21,46 +19,39 @@ function App() {
 
   useEffect(() => {
     const getData = async () => {
-      const info = await fetch(
-        `http://www.omdbapi.com/?apikey=b66fe896&i=${movie}`
-      );
-      const data = await info.json();
-      setMovieInf(data.Search);
-    };
+      const response = await fetch(`http://www.omdbapi.com/?apikey=b66fe896&s=${movieE}`);
+      const dataMovies = await response.json();
+      setMovieInf( dataMovies.Search);
+    }
     getData();
-    
-  }, [movie]);
 
-  const handleSearchMovie = (value) => {
-    setMovie(value);
-    document.querySelector("#movie").value = "";
-  };
+  }, [movieE]);
+  
+   const onSearch =(value) => {
+     setmovieE(value);
+   }
+
 
   return (
-    <>
-      <br></br>
-      <Row>
-        <Col xs={2} sm={4} md={6} lg={8} xl={10}>
-        </Col>
-        <Col xs={20} sm={16} md={12} lg={8} xl={4}>
-        <Search  
-              placeholder="Nombre "
-              enterButton="Search"
+      <>
+        <Row>
+        <Col span={10}></Col>
+        <Col span={14}><Space direction="vertical">
+          <label>Ingrese nombre de la pelicula</label>
+          <Search  
+              placeholder=""
+              enterButton="Buscar pelicula"
               size="large"
-              suffix={suffix}
-              onSearch={handleSearchMovie}    
-        />
-        </Col>
-        <Col xs={2} sm={4} md={6} lg={8} xl={10}>
-        </Col>
-      </Row>
-      <Row>
-      <Col span={2}></Col>
-        <Col span={22}><Movies movieInf={movieInf}/></Col>
-      </Row>
-      <br></br>
-
-    </>
+              onSearch={onSearch}
+        
+          />
+        </Space></Col>
+        </Row>
+        <Row>
+        <Col span={2}></Col>
+        <Col span={22}><Movies movies={movieInf}/></Col>
+        </Row>
+      </>
   );
 }
 

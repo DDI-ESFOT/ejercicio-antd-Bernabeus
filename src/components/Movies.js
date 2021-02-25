@@ -4,8 +4,8 @@ import { Button, Card} from 'antd';
 const Movies = ({ movies }) => {
 
     const { Meta } = Card;
-    const [omdbId, setOmdbId] = useState(null);
-    const [currentMovie, setCurrentMovie] = useState(null);
+    const [omdbId, setOmdbId] = useState([]);
+    const [currentMovie, setCurrentMovie] = useState([]);
 
 
     useEffect(() => {
@@ -22,7 +22,9 @@ const Movies = ({ movies }) => {
     }, [omdbId]);
 
     return (
-            movies.map((movie, id) => (
+        <>
+        <div>
+           {movies.map((movie, id) => (
                         <Card
                             style={{ width: 350 }}
                             cover={
@@ -41,6 +43,9 @@ const Movies = ({ movies }) => {
                             />
                         </Card>
                         ))
+}
+</div>
+    </>
     );
 }
 
