@@ -1,11 +1,12 @@
 import Movies from "./Movies";
+import "../styles/App.css";
 import React, {useEffect, useState} from "react";
 import { Input, Space,Row,Col} from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
 
 function App() {
   const [movieInf, setMovieInf] = useState([]);
-  const [movieE, setmovieE] = useState('Transformers');
+  const [movieE, setmovieE] = useState('Transformer');
 
   const { Search } = Input;
   const suffix = (
@@ -47,6 +48,7 @@ function App() {
           />
         </Space></Col>
         </Row>
+        <br></br>
         <Row>
         <Col span={2}></Col>
         <Col span={22}><Movies movies={movieInf}/></Col>
